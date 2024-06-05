@@ -5,17 +5,15 @@ import { ITodo } from './todo.interface';
 import { HttpService } from './http.service';
 import { CommonModule } from '@angular/common';
 
-
-
-@Component({
+Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule], 
+  imports: [RouterOutlet, FormsModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'todo';
+  title = 'todo'
   list: ITodo[] = [];
   list$ = this.http.getList();
 
@@ -27,4 +25,3 @@ export class AppComponent {
     });
   }
 }
-
