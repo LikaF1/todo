@@ -2,7 +2,13 @@
 
   <header>
     <h1 class="title">Tudu</h1>
-    <button type="button" class="add-btn" (click)="addItem()">+</button>
+    <button 
+      type="button"
+      class="add-btn"
+      (click)="addItem()"
+    >
+    +
+    </button>
   </header>
 
   <main>
@@ -22,6 +28,13 @@
           [(ngModel)]="todo.description"
         >
         </textarea>
+        <button
+          type="button"
+          class="save-btn"
+          (click)="SaveItem(todo.id, todo.name, todo.description)"
+        >
+        Save
+        </button>
       </li>
     }
     </ul>
