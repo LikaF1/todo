@@ -5,15 +5,13 @@ import { ITodo } from './todo.interface';
 import { HttpService } from './http.service';
 import { CommonModule } from '@angular/common';
 
-
-
-@Component({
+Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule], 
+  imports: [RouterOutlet, FormsModule, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-})
+  styleUrl: './app.component.scss',
+});
 export class AppComponent {
   title = 'todo';
   list: ITodo[] = [];
@@ -23,8 +21,16 @@ export class AppComponent {
 
   addItem() {
     this.list.push({
-      id: this.list.length + 1, name: 'Задача 1', description: 'Поработать 8 часов'
+      id: this.list.length + 1, name: 'Новая задача', description: 'Описание',
     });
   }
+  SaveItem(id: number, name: string, description: string) {
+    for (let i = 0; i < this.list.length; i++) {
+      if (this.list[i].id === id) {
+        this.list[i].name = name;
+        this.list[i].description = description;
+        break;
+      }
+    }
+  }
 }
-

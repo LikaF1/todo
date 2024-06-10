@@ -1,0 +1,166 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*",
+    "src/**/*.spec.ts"
+  ],
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json",
+          "e2e/tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "semi": ["error", "always"],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "app",
+            "style": "kebab-case",
+            "type": "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "prefix": "app",
+            "style": "camelCase",
+            "type": "attribute"
+          }
+        ],
+        "@typescript-eslint/member-delimiter-style": [
+          "warn",
+          {
+            "multiline": {
+              "delimiter": "semi",
+              "requireLast": true
+            },
+            "singleline": {
+              "delimiter": "semi",
+              "requireLast": false
+            }
+          }
+        ],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "property",
+            "modifiers": ["static"],
+            "format": ["PascalCase"],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "property",
+            "modifiers": ["static", "private"],
+            "format": ["PascalCase"],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "property",
+            "modifiers": ["private"],
+            "format": ["camelCase"],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "variable",
+            "format": ["camelCase", "PascalCase"]
+          },
+          {
+            "selector": "variable",
+            "modifiers": ["const"],
+            "format": ["PascalCase", "camelCase", "UPPER_CASE"]
+          }
+        ],
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-empty-interface": "error",
+        "@typescript-eslint/no-inferrable-types": [
+          "error",
+          {
+            "ignoreParameters": true
+          }
+        ],
+        "@typescript-eslint/no-misused-new": "error",
+        "@typescript-eslint/no-non-null-assertion": "error",
+        "@typescript-eslint/no-shadow": "error",
+        "@typescript-eslint/no-unused-expressions": "error",
+        "@typescript-eslint/prefer-function-type": "error",
+        "@typescript-eslint/semi": [
+          "error",
+          "always"
+        ],
+        "@typescript-eslint/type-annotation-spacing": "error",
+        "@typescript-eslint/unified-signatures": "error",
+        "@typescript-eslint/no-explicit-any": "off",
+        "brace-style": [
+          "error",
+          "1tbs"
+        ],
+        "max-len": ["error", { "code": 120 }],
+        "constructor-super": "error",
+        "curly": "error",
+        "dot-notation": "off",
+        "eqeqeq": [
+          "error",
+          "smart"
+        ],
+        "@typescript-eslint/indent": ["error", 2],
+        "indent": ["error", 2, {"SwitchCase": 1}],
+        "padding-line-between-statements": [
+          "error",
+          { "blankLine": "always", "prev": "*", "next": "return" },
+          { "blankLine": "always", "prev": ["const", "let"], "next": "*"},
+          { "blankLine": "any", "prev": ["const", "let"], "next": ["const", "let"]},
+          { "blankLine": "always", "prev": ["case", "default", "for", "function", "if", "switch", "while", "try"], "next": "*" },
+          { "blankLine": "always", "prev": "*", "next": ["case", "default", "for", "function", "if", "switch"] }
+        ],
+        "space-before-function-paren": ["error", {
+          "anonymous": "never",
+          "named": "never",
+          "asyncArrow": "always"
+        }],
+        "no-multiple-empty-lines": ["error", {
+          "max": 1, "maxEOF": 1, "maxBOF": 0
+        }],
+        "no-debugger": "error",
+        "no-trailing-spaces": "error",
+        "@typescript-eslint/quotes": ["error", "single"], // Одинарные кавычки для строк
+        // Предупреждение об использовании console за исключением console.error
+        "no-console": ["warn", {"allow": ["error"]}],
+        "comma-dangle": ["error", {
+          "arrays": "always-multiline",
+          "objects": "always-multiline",
+          "imports": "never",
+          "exports": "never",
+          "functions": "only-multiline"
+        }]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}
