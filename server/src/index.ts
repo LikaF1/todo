@@ -2,24 +2,14 @@ import express from 'express';
 import {ITodo} from './todo.interface';
 
 const PORT = 1111;
-
 const app = express();
 
 app.use(express.json());
 
 const list: ITodo[] = [];
 
-app.set('view engine', 'ejs');
-app.set('views', './templates');
-
 app.listen(PORT, () => {
   console.log(`Сервер запущен: http://localhost:${PORT}`);
-});
-
-app.get('/', (req, res) => {
-  res.render('index', {
-    id: 1, name: 'хуй', description: 'большой хуй',
-  });
 });
 
 app.get('/list', (req, res) => {
@@ -28,9 +18,11 @@ app.get('/list', (req, res) => {
 
 app.get('/add', (req, res) => {
   const todo = req.body as ITodo;
+  const lastTodo = list[list.length - 1];
+  const lastId = lastTodo?.id || 0;
 
-  // console.log(todo);
+  todo.id = lastId + 1;
+
   list.push(todo);
-  // console.log(list);
-  res.status(200).send('Данные сохранены');
+  res.json(todo.id);
 });
