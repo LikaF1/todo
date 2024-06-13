@@ -1,0 +1,32 @@
+<li>
+
+  <input
+    type="text"
+    placeholder="Name"
+    [(ngModel)]="todo.name"
+  />
+
+  <br>
+
+  <textarea
+    placeholder="Write your task"
+    [(ngModel)]="todo.description"
+  >
+  </textarea>
+
+  <div class="footer">
+    <button
+      type="button"
+      (click)="saveItem()"
+    >
+    Save
+    </button>
+
+    <button
+      type="button"
+      (click)="removeItem()"
+    >
+    Delete
+    </button>
+  </div>
+</li>

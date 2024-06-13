@@ -11,7 +11,14 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   getList(): Observable<ITodo[]> {
-    return this.http.get<ITodo[]>('/api/list');
+    return this.http.post<ITodo[]>('/api/list', undefined);
   }
 
+  saveTodo(todo: ITodo): Observable<ITodo> {
+    return this.http.post<ITodo>('/api/add', todo);
+  }
+
+  removeTodo(id: number): Observable<ITodo> {
+    return this.http.post<ITodo>('/api/list', {id});
+  }
 }

@@ -2,41 +2,20 @@
 
   <header>
     <h1 class="title">Tudu</h1>
-    <button 
-      type="button"
-      class="add-btn"
-      (click)="addItem()"
-    >
-    +
+    <button type="button" class="add-btn" (click)="addItem()">
+      +
     </button>
   </header>
 
   <main>
     <ul>
-    @for (todo of list$ | async; track todo.id) {
-      <li> 
-        <input 
-          type="text"
-          class="name"
-          placeholder="Name"
-          [(ngModel)]="todo.name"
-        />
-        <br>
-        <textarea
-          class="description"
-          placeholder="Write your task"
-          [(ngModel)]="todo.description"
-        >
-        </textarea>
-        <button
-          type="button"
-          class="save-btn"
-          (click)="SaveItem(todo.id, todo.name, todo.description)"
-        >
-        Save
-        </button>
-      </li>
-    }
+      @for (todo of list; track $index) {
+      <app-todo (save)='saveItem(todo)' (remove)='removeItem(todo.id)' />
+      }
+
+      @for (todo of list$ | async; track todo.id) {
+      <app-todo (save)='saveItem(todo)' (remove)='removeItem(todo.id)' />
+      }
     </ul>
   </main>
 
