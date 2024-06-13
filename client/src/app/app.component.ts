@@ -4,33 +4,38 @@ import { RouterOutlet } from '@angular/router';
 import { ITodo } from './todo.interface';
 import { HttpService } from './http.service';
 import { CommonModule } from '@angular/common';
+import { Observable} from 'rxjs';
+import { TodoComponent } from '../components/todo.component';
 
-Component({
+@Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule],
+  imports: [RouterOutlet, FormsModule, CommonModule, TodoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-});
+})
 export class AppComponent {
   title = 'todo';
   list: ITodo[] = [];
-  list$ = this.http.getList();
+  list$: Observable<ITodo[]> = this.http.getList();
 
-  constructor(private http: HttpService){}
+  constructor(private http: HttpService) {}
 
   addItem() {
     this.list.push({
-      id: this.list.length + 1, name: 'Новая задача', description: 'Описание',
+      name: '', description: '',
     });
   }
-  SaveItem(id: number, name: string, description: string) {
-    for (let i = 0; i < this.list.length; i++) {
-      if (this.list[i].id === id) {
-        this.list[i].name = name;
-        this.list[i].description = description;
-        break;
-      }
+
+  saveItem(todo: ITodo) {
+    this.http.saveTodo(todo).subscribe((t) => console.log(t));
+  }
+
+  removeItem(id?: number) {
+    if (id) {
+      this.http.removeTodo(id).subscribe((t) => console.log(t));
+    } else {
+      this.list = this.list.filter(todo => todo.id !== id);
     }
   }
 }

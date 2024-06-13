@@ -4,75 +4,34 @@
   margin: auto;
   border: 1px solid black;
   color: black;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
   header {
-    background-color: #F6814E;
+    background-color: coral;
     display: flex;
+    align-items: center;
+    justify-content:space-around;
     height: 37px;
-  
+
     .title {
       text-align: center;
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-      width: 94%;
-      margin-top: -1px;
     }
-  
+
     .add-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 30px;
+      background-color: #fca06a;
+      border-radius: 50%;
       width: 30px;
       height: 30px;
       font-size: 20px;
-      margin-top: 4px;
     }
   }
-  
+
   ul {
     list-style: none;
-    padding: 0;
-  
-    li {
-      width: 500px;
-      min-height: 175px;
-      border-radius: 20px;
-      border: 2px solid #F6814E;
-      margin: 20px auto;
-  
-      .name {
-        width: 450px;
-        height: 30px;
-        border-radius: 10px;
-        border: 2px solid #F6814E;
-        margin: 10px 25px;
-      }
-  
-      .description {
-        width: 450px;
-        min-height: 90px;
-        border-radius: 10px;
-        border: 2px solid #F6814E;
-        margin: 5px 25px;
-      }
-  
-      .save-btn {
-        box-sizing: border-box;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        font-size: 20px;
-        padding: 5px;
-        width: 200px;
-        border: 2px solid #F6814E;
-        margin: 10px 150px;
-      }
-  
-      .save-btn:hover {
-        background: rgba(170, 80, 16, 0.565);
-      }
-  
-      .save-btn:active {
-        background: rgba(255, 98, 0, 0.86);
-      }
+    padding: 1rem 2rem;
+
+    app-todo:not(:last-child) {
+      margin-bottom: 1rem;
     }
   }
 }
-

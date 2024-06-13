@@ -1,0 +1,36 @@
+
+
+li {
+  padding: 1rem 2rem;
+
+  >*:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  &, input, textarea, button {
+    border-radius: 10px;
+    border: 2px solid #F6814E;
+  }
+
+  input, textarea {
+    width: 100%;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      background: white;
+      font-size: 20px;
+    }
+
+    button:hover {
+      background: lightcoral;
+    }
+
+    button:active {
+      background: orange;
+    }
+  }
+}
