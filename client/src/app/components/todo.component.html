@@ -4,6 +4,8 @@
     type="text"
     placeholder="Name"
     [(ngModel)]="todo.name"
+    required
+    #name="ngModel"
   />
 
   <br>
@@ -11,12 +13,15 @@
   <textarea
     placeholder="Write your task"
     [(ngModel)]="todo.description"
+    required
+    #description="ngModel"
   >
   </textarea>
 
   <div class="footer">
     <button
       type="button"
+      [disabled]="!(name.touched || description.touched) && (name.invalid || description.invalid)"
       (click)="saveItem()"
     >
     Save
