@@ -21,7 +21,7 @@
   <div class="footer">
     <button
       type="button"
-      [disabled]="!(name.touched || description.touched) && (name.invalid || description.invalid)"
+      [disabled]="!(name.touched || description.touched) || (name.invalid || description.invalid)"
       (click)="saveItem()"
     >
     Save
