@@ -3,7 +3,7 @@ import { writeFileSync } from 'fs';
 import * as path from 'path';
 
 let list: ITodo[] = [];
-const filePath = path.join(__dirname, 'store.json');
+const filePath = path.join(__dirname,'..' ,'store.json');
 
 try {
   list = require(filePath);
