@@ -1,7 +1,7 @@
-import { ITodo } from './todo.interface';
-import { HttpService } from './http.service';
-import { Observable} from 'rxjs';
 import { Component } from '@angular/core';
+import { BehaviorSubject, Observable, concatMap } from 'rxjs';
+import { HttpService } from './http.service';
+import { ITodo } from './todo.interface';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,11 @@ export class AppComponent {
 
   title = 'todo';
   list: ITodo[] = [];
-  list$: Observable<ITodo[]>  = this.http.getList();
+  update$ = new BehaviorSubject<true>(true);
+
+  list$: Observable<ITodo[]> = this.update$.pipe(
+    concatMap(() => this.http.getList())
+  );
 
   constructor(private http: HttpService) {}
 
@@ -24,33 +28,38 @@ export class AppComponent {
   }
 
   saveItem(todo: ITodo) {
-    this.http.saveTodo(todo).subscribe(
-      (t) => {
-        console.log('Обращение к серверу прошло успешно '+ t);
+    this.http.saveTodo(todo).subscribe({
+      next: () => {
+        console.log('Обращение к серверу прошло успешно ');
         alert('Обращение к серверу прошло успешно ');
+        this.update$.next(true);
+        this.removeItem(todo);
       },
-      (error) => {
+      error: (error) => {
         console.error('Ошибка в подключении к серверу:', error);
         alert('Ошибка в подключении к серверу:');
       }
-    );
+    });
   }
 
-  removeItem(id?: number) {
-    if (id) {
-      this.http.removeTodo(id).subscribe(
-        (t) => {
-          this.http.removeTodo(id);
-          console.log('Обращение к серверу прошло успешно ' + t);
-          alert('Обращение к серверу прошло успешно ');
-        }
-        ,(error) => {
-          console.error('Ошибка в подключении к серверу:', error);
-          alert('Ошибка в подключении к серверу:');
-        }
-      );
-    } else {
-      this.list = this.list.filter(todo => todo.id !== id);
+  removeItem(todo: ITodo) {
+    if (!todo.id) {
+      this.list = this.list.filter(t => t !== todo);
+      return;
     }
+
+    const id = todo.id;
+
+    this.http.removeTodo(todo.id).subscribe({
+      next: () => {
+        console.log('Обращение к серверу прошло успешно ');
+        alert('Обращение к серверу прошло успешно ');
+        this.update$.next(true);
+      },
+      error: (error) => {
+        console.error('Ошибка в подключении к серверу:', error);
+        alert('Ошибка в подключении к серверу:');
+      }
+    });
   }
 }
