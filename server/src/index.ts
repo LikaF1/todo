@@ -1,8 +1,10 @@
 import express from 'express';
 import {ITodo} from './todo.interface';
+import { Store } from 'store';
 
 const PORT = 1111;
 const app = express();
+const store = new Store();
 
 app.use(express.json());
 
@@ -14,6 +16,9 @@ app.listen(PORT, () => {
 
 app.post('/list', (req, res) => {
   res.json(list);
+
+  store.write(list);
+
 });
 
 app.post('/add', (req, res) => {
@@ -22,6 +27,7 @@ app.post('/add', (req, res) => {
   const lastId = lastTodo?.id || 0;
 
   todo.id = lastId + 1;
+  store.add(todo);
 
   list.push(todo);
   res.json(todo);
@@ -30,6 +36,8 @@ app.post('/add', (req, res) => {
 app.post('/remove', (req, res) => {
   const {id} = req.body;
   const index = list.findIndex((todo) => todo.id === id);
+
+  store.remove(index);
 
   if(index !== -1){
     list.splice(index, 1);
