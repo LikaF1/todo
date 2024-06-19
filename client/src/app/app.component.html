@@ -10,11 +10,11 @@
   <main>
     <ul>
       @for (todo of list; track $index) {
-      <app-todo (save)='saveItem(todo)' (remove)='removeItem(todo.id)' />
+      <app-todo [todo]="todo" (save)='saveItem(todo)' (remove)='removeItem(todo.id)' />
       }
 
       @for (todo of list$ | async; track todo.id) {
-      <app-todo (save)='saveItem(todo)' (remove)='removeItem(todo.id)' />
+      <app-todo [todo]="todo" (save)='saveItem(todo)' (remove)='removeItem(todo.id)' />
       }
     </ul>
   </main>
