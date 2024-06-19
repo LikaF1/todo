@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TodoComponent } from './components/todo.component';
 import { HttpService } from './http.service';
-import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,12 +14,12 @@ import { HttpClientModule } from '@angular/common/http';
     TodoComponent,
   ],
   imports: [
-    HttpClientModule,
+    // HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
   ],
   providers: [HttpService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
