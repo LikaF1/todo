@@ -23,13 +23,10 @@ app.post('/list', (req, res) => {
 
 app.post('/add', (req, res) => {
   const todo = req.body as ITodo;
-  const lastTodo = list[list.length - 1];
-  const lastId = lastTodo?.id || 0;
+  const lastId= list[0]?.id || 0;
 
   todo.id = lastId + 1;
-  store.add(todo);
-
-  list.push(todo);
+  list.splice(0, 0, todo);
   res.json(todo);
 });
 

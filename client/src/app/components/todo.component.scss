@@ -24,14 +24,18 @@ li {
     button {
       background: white;
       font-size: 20px;
-    }
 
-    button:hover {
-      background: lightcoral;
-    }
+      &:hover:not(:disabled) {
+        background: lightcoral;
+      }
 
-    button:active {
-      background: orange;
+      &:active {
+        background: orange;
+      }
+
+      &:disabled {
+        color: grey;
+      }
     }
   }
 }
